@@ -1,3 +1,5 @@
+import random
+
 # Читаем с файла матрицу
 m = []
 with open('data.txt', 'r') as file:
@@ -48,7 +50,6 @@ print("Критерий Сейвиджа: " + str(min[0]) + " A" + str(min[1] + 
 
 # Критерий Гурвица
 a = 0.7
-
 mins = []
 for i in range(len(m)):
     min = [m[i][0], i, 0]
@@ -70,4 +71,22 @@ max = GurvitsResoult[0]
 for i in GurvitsResoult:
     if i[0] > max[0]:
         max = i
-print("Критерий Гурвица: " + str(max[0]) + " A" + str(max[1] + 1))
+print("Критерий Гурвица(для α = " + str(a) + "): " + str(max[0]) + " A" + str(max[1] + 1))
+
+# Критерий  ̶б̶а̶б̶к̶и̶ ̶г̶а̶д̶а̶л̶к̶и̶ Байеса
+randMass = []  # генерируем шизу природы
+rSum = 0
+for i in range(len(m[0]) - 1):
+    r = random.uniform(0, 1 - rSum)
+    rSum += r
+    randMass.append(r)
+randMass.append(1 - rSum)
+maxSum = [m[0][0], 0]
+for i in range(len(m)):
+    sum = 0
+    for j in range(len(m[0])):
+        sum += (m[i][j] * randMass[j])
+    if sum > maxSum[0]:
+        maxSum = [sum, i]
+print("Критерий Байеса: " + str(maxSum[0]) + " A" + str(maxSum[1] + 1))
+print("\tДля шизы природы: " + str(randMass))
