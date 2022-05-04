@@ -1,4 +1,6 @@
-import random
+import numpy as np
+import matplotlib.pyplot as plt
+import gauss
 
 
 # Если m1 >= m2 значит true
@@ -14,7 +16,7 @@ def sravnMass(m1, m2):
 def sravnMassVertikal(m, i1, i2):
     flag = True
     for i in range(len(m)):
-        if m[i][i1] >= m[i][i2]:
+        if m[i][i1] > m[i][i2]:
             flag = False
             break
     return flag
@@ -61,3 +63,33 @@ for i in m:
     m = sokrStrock(m)
     m = sokrStrockVertikal(m)
 print(m)
+
+
+pointList = []
+x = np.arange(-10, 10.01, 0.01)
+plt.plot(x, (1 - m[0][0] * x) / m[1][0], x, (1 - m[0][1] * x) / m[1][1])
+# фигачим все крайнии точки
+pointList.append([0, (1 - m[0][0] * 0) / m[1][0]])
+pointList.append([0, (1 - m[0][1] * 0) / m[1][1]])
+pointList.append([(1 - m[0][1] * 0) / m[0][0], 0])
+pointList.append([(1 - m[1][1] * 0) / m[0][1], 0])
+pointList.append(gauss.slau(2, [[m[0][0], m[1][0], 1], [m[0][1], m[1][1], 1]]))
+flag = True
+while flag:
+    flag = False
+    for i in range(len(pointList)):
+        if (m[0][0] * pointList[i][0] + m[1][0] * pointList[i][1] < 1) or (
+                m[0][1] * pointList[i][0] + m[1][1] * pointList[i][1] < 1):
+            flag = True
+            del pointList[i]
+            break
+min = pointList[0]
+for i in pointList:
+    if i[0] + i[1] < min[0] + min[1]:
+        min = i
+u = 1 / (min[0] + min[1])
+p1 = min[0] * u
+p2 = min[1] * u
+print("p1: " + str(p1))
+print("p2: " + str(p2))
+plt.show()
