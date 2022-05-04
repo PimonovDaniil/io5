@@ -69,5 +69,13 @@ for i in range(len(vectorShepli)):
     a += vectorShepli[i][0]
     b += vectorShepli[i][1]
     c += vectorShepli[i][2]
-print("\nВывод:")
-print([a/len(vectorShepli), b/len(vectorShepli), c/len(vectorShepli)])
+print("\nВектор Шепли:")
+print([a / len(vectorShepli), b / len(vectorShepli), c / len(vectorShepli)])
+
+print("[А] = " + str(min(a1, b1) * 100 + (a1 - min(a1, b1)) * 10 + (b1 - min(a1, b1)) * 30))
+print("[B] = " + str(min(a2, b2) * 100 + (a2 - min(a2, b2)) * 10 + (b2 - min(a2, b2)) * 30))
+print("[C] = " + str(min(a3, b3) * 100 + (a3 - min(a3, b3)) * 10 + (b3 - min(a3, b3)) * 30))
+print("[А, B] = " + str(min(a1+a2, b1+b2) * 100 + (a1+a2 - min(a1+a2, b1+b2)) * 10 + (b1+b2 - min(a1+a2, b1+b2)) * 30))
+print("[А, C] = " + str(min(a1+a3, b1+b3) * 100 + (a1+a3 - min(a1+a3, b1+b3)) * 10 + (b1+b3 - min(a1+a3, b1+b3)) * 30))
+print("[B, C] = " + str(min(a2+a3, b2+b3) * 100 + (a2+a3 - min(a2+a3, b2+b3)) * 10 + (b2+b3 - min(a2+a3, b2+b3)) * 30))
+print("[A, B, C] = " + str(min(a1+a2+a3, b1+b2+b3) * 100 + (a1+a2+a3 - min(a1+a2+a3, b1+b2+b3)) * 10 + (b1+b2+b3 - min(a1+a2+a3, b2+b2+b3)) * 30))

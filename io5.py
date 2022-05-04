@@ -88,5 +88,5 @@ for i in range(len(m)):
         sum += (m[i][j] * randMass[j])
     if sum > maxSum[0]:
         maxSum = [sum, i]
-print("Критерий Байеса: " + str3(maxSum[0]) + " A" + str(maxSum[1] + 1))
+print("Критерий Байеса: " + str(maxSum[0]) + " A" + str(maxSum[1] + 1))
 print("\tДля шизы природы: " + str(randMass))

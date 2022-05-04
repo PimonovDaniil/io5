@@ -118,7 +118,7 @@ print("q1: " + str(q1))
 print("q2: " + str(q2))
 
 
-# plt.plot(x, (1 - m[0][0] * x) / m[1][0], x, (1 - m[0][1] * x) / m[1][1])
-# plt.show()
-# plt.plot(x, (1 - m[0][0] * x) / m[0][1], x, (1 - m[1][0] * x) / m[1][1])
-# plt.show()
+plt.plot(x, (1 - m[0][0] * x) / m[1][0], x, (1 - m[0][1] * x) / m[1][1])
+plt.show()
+plt.plot(x, (1 - m[0][0] * x) / m[0][1], x, (1 - m[1][0] * x) / m[1][1])
+plt.show()
