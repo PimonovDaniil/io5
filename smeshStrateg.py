@@ -45,7 +45,6 @@ def sokrStrockVertikal(m):
                 for j in range(len(m[0])):
                     if i != j and sravnMassVertikal(m, i, j):
                         flag = True
-                        # del m[j]
                         for i2 in range(len(m)):
                             del m[i2][j]
                         break
@@ -64,10 +63,8 @@ for i in m:
     m = sokrStrockVertikal(m)
 print(m)
 
-
 pointList = []
 x = np.arange(-10, 10.01, 0.01)
-plt.plot(x, (1 - m[0][0] * x) / m[1][0], x, (1 - m[0][1] * x) / m[1][1])
 # фигачим все крайнии точки
 pointList.append([0, (1 - m[0][0] * 0) / m[1][0]])
 pointList.append([0, (1 - m[0][1] * 0) / m[1][1]])
@@ -75,7 +72,7 @@ pointList.append([(1 - m[0][1] * 0) / m[0][0], 0])
 pointList.append([(1 - m[1][1] * 0) / m[0][1], 0])
 pointList.append(gauss.slau(2, [[m[0][0], m[1][0], 1], [m[0][1], m[1][1], 1]]))
 flag = True
-while flag:
+while flag:  # отсекаем точки что не подходят
     flag = False
     for i in range(len(pointList)):
         if (m[0][0] * pointList[i][0] + m[1][0] * pointList[i][1] < 1) or (
@@ -92,4 +89,36 @@ p1 = min[0] * u
 p2 = min[1] * u
 print("p1: " + str(p1))
 print("p2: " + str(p2))
-plt.show()
+
+pointList = []
+# фигачим все крайнии точки
+pointList.append([0, (1 - m[0][0] * 0) / m[0][1]])
+pointList.append([0, (1 - m[1][0] * 0) / m[1][1]])
+pointList.append([(1 - m[0][1] * 0) / m[0][0], 0])
+pointList.append([(1 - m[1][1] * 0) / m[1][0], 0])
+pointList.append(gauss.slau(2, [[m[0][0], m[0][1], 1], [m[1][0], m[1][1], 1]]))
+flag = True
+while flag:  # отсекаем точки что не подходят
+    flag = False
+    for i in range(len(pointList)):
+        if (m[0][0] * pointList[i][0] + m[0][1] * pointList[i][1] < 1) or (
+                m[1][0] * pointList[i][0] + m[1][1] * pointList[i][1] < 1):
+            flag = True
+            del pointList[i]
+            break
+# print(pointList)
+min = pointList[0]
+for i in pointList:
+    if i[0] + i[1] < min[0] + min[1]:
+        min = i
+u = 1 / (min[0] + min[1])
+q1 = min[0] * u
+q2 = min[1] * u
+print("q1: " + str(q1))
+print("q2: " + str(q2))
+
+
+# plt.plot(x, (1 - m[0][0] * x) / m[1][0], x, (1 - m[0][1] * x) / m[1][1])
+# plt.show()
+# plt.plot(x, (1 - m[0][0] * x) / m[0][1], x, (1 - m[1][0] * x) / m[1][1])
+# plt.show()
